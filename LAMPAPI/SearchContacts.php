@@ -32,19 +32,27 @@
 			WHERE UserID=? AND (FirstName LIKE ? OR LastName LIKE ? OR Phone LIKE ? OR Email LIKE ?)
 			ORDER BY LastName, FirstName"
 		);
+		if (!$stmt)
+		{
+			returnWithError($conn->error);
+			$conn->close();
+			exit();
+		}
+
 		$stmt->bind_param("issss", $userId, $search, $search, $search, $search);
 		$stmt->execute();
-		$result = $stmt->get_result();
+		$stmt->store_result();
+		$stmt->bind_result($id, $firstName, $lastName, $phone, $email);
 
 		$contacts = array();
-		while ($row = $result->fetch_assoc())
+		while ($stmt->fetch())
 		{
 			$contacts[] = array(
-				"id" => (int)$row["ID"],
-				"firstName" => $row["FirstName"],
-				"lastName" => $row["LastName"],
-				"phone" => $row["Phone"],
-				"email" => $row["Email"]
+				"id" => (int)$id,
+				"firstName" => $firstName,
+				"lastName" => $lastName,
+				"phone" => $phone,
+				"email" => $email
 			);
 		}
 

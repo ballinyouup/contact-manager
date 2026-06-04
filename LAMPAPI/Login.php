@@ -1,4 +1,3 @@
-
 <?php
 	header("Access-Control-Allow-Origin: *");
 	header("Access-Control-Allow-Methods: POST, OPTIONS");
@@ -10,6 +9,14 @@
 	}
 
 	$inData = getRequestInfo();
+	$login = trim($inData["login"] ?? "");
+	$password = $inData["password"] ?? "";
+
+	if ($login === "" || $password === "")
+	{
+		returnWithError("Login and password are required");
+		exit();
+	}
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error)
@@ -19,13 +26,22 @@
 	else
 	{
 		$stmt = $conn->prepare("SELECT ID, firstName, lastName FROM Users WHERE Login=? AND Password=?");
-		$stmt->bind_param("ss", $inData["login"], $inData["password"]);
-		$stmt->execute();
-		$result = $stmt->get_result();
-
-		if ($row = $result->fetch_assoc())
+		if (!$stmt)
 		{
-			returnWithInfo($row["firstName"], $row["lastName"], $row["ID"]);
+			returnWithError($conn->error);
+			$conn->close();
+			exit();
+		}
+
+		$stmt->bind_param("ss", $login, $password);
+		$stmt->execute();
+		$stmt->store_result();
+
+		if ($stmt->num_rows > 0)
+		{
+			$stmt->bind_result($id, $firstName, $lastName);
+			$stmt->fetch();
+			returnWithInfo($firstName, $lastName, $id);
 		}
 		else
 		{

@@ -29,11 +29,18 @@
 	else
 	{
 		$stmt = $conn->prepare("SELECT ID FROM Users WHERE Login=?");
+		if (!$stmt)
+		{
+			returnWithError($conn->error);
+			$conn->close();
+			exit();
+		}
+
 		$stmt->bind_param("s", $login);
 		$stmt->execute();
-		$result = $stmt->get_result();
+		$stmt->store_result();
 
-		if ($result->fetch_assoc())
+		if ($stmt->num_rows > 0)
 		{
 			$stmt->close();
 			$conn->close();
@@ -43,6 +50,13 @@
 		$stmt->close();
 
 		$stmt = $conn->prepare("INSERT INTO Users (firstName, lastName, Login, Password) VALUES (?, ?, ?, ?)");
+		if (!$stmt)
+		{
+			returnWithError($conn->error);
+			$conn->close();
+			exit();
+		}
+
 		$stmt->bind_param("ssss", $firstName, $lastName, $login, $password);
 
 		if ($stmt->execute())
