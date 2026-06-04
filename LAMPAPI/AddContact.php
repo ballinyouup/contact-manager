@@ -1,4 +1,6 @@
 <?php
+	mysqli_report(MYSQLI_REPORT_OFF);
+
 	header("Access-Control-Allow-Origin: *");
 	header("Access-Control-Allow-Methods: POST, OPTIONS");
 	header("Access-Control-Allow-Headers: Content-Type");
@@ -22,7 +24,7 @@
 		exit();
 	}
 
-	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
+	$conn = new mysqli("127.0.0.1", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error)
 	{
 		returnWithError($conn->connect_error);
