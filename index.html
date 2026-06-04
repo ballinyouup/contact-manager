@@ -1,32 +1,75 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Personal Contact Manager</title>
 	<script type="text/javascript" src="js/md5.js"></script>
 	<script type="text/javascript" src="js/code.js"></script>
     <link href="css/styles.css" rel="stylesheet">	
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel="stylesheet">
 </head>
-<body>
+<body class="auth-page">
 
-<h1 id="title">Personal Contact Manager</h1>
+<main class="auth-shell">
+	<section class="brand-panel" aria-label="Application introduction">
+		<div class="poro-scene" aria-hidden="true">
+			<div class="poro">
+				<span class="horn horn-left"></span>
+				<span class="horn horn-right"></span>
+				<span class="ear ear-left"></span>
+				<span class="ear ear-right"></span>
+				<span class="eye eye-left"></span>
+				<span class="eye eye-right"></span>
+				<span class="brow brow-left"></span>
+				<span class="brow brow-right"></span>
+				<span class="mustache mustache-left"></span>
+				<span class="mustache mustache-right"></span>
+				<span class="tongue"></span>
+			</div>
+		</div>
+		<p class="eyebrow">Freljord-ready contacts</p>
+		<h1 id="title">Poro Contact Manager</h1>
+		<p class="lead">A clean, team-demo friendly personal contact manager with account-based contacts and server-side search.</p>
+		<div class="feature-strip">
+			<span>Private contacts</span>
+			<span>AJAX API</span>
+			<span>Remote database</span>
+		</div>
+	</section>
 
-<div id="loginDiv">
-	<span id="inner-title">Log In</span>
-	<input type="text" id="loginName" placeholder="Username" /><br />
-	<input type="password" id="loginPassword" placeholder="Password"/><br />
-	<button type="button" id="loginButton" class="buttons" onclick="doLogin();">Log In</button>
-	<span id="loginResult"></span>
-</div>
+	<section class="auth-card" aria-label="Account access">
+		<div id="loginDiv">
+			<span id="inner-title">Welcome Back</span>
+			<label for="loginName">Username</label>
+			<input type="text" id="loginName" placeholder="Enter username" autocomplete="username" />
+			<label for="loginPassword">Password</label>
+			<input type="password" id="loginPassword" placeholder="Enter password" autocomplete="current-password"/>
+			<button type="button" id="loginButton" class="buttons" onclick="doLogin();">Log In</button>
+			<span id="loginResult"></span>
+		</div>
 
-<div id="registerDiv">
-	<span id="inner-title">Create Account</span>
-	<input type="text" id="registerFirstName" placeholder="First Name" /><br />
-	<input type="text" id="registerLastName" placeholder="Last Name" /><br />
-	<input type="text" id="registerName" placeholder="Username" /><br />
-	<input type="password" id="registerPassword" placeholder="Password"/><br />
-	<button type="button" id="registerButton" class="buttons" onclick="doRegister();">Sign Up</button>
-	<span id="registerResult"></span>
-</div>
+		<div id="registerDiv">
+			<span id="inner-title">Create Account</span>
+			<div class="form-grid two-column">
+				<div>
+					<label for="registerFirstName">First Name</label>
+					<input type="text" id="registerFirstName" placeholder="First name" autocomplete="given-name" />
+				</div>
+				<div>
+					<label for="registerLastName">Last Name</label>
+					<input type="text" id="registerLastName" placeholder="Last name" autocomplete="family-name" />
+				</div>
+			</div>
+			<label for="registerName">Username</label>
+			<input type="text" id="registerName" placeholder="Choose username" autocomplete="username" />
+			<label for="registerPassword">Password</label>
+			<input type="password" id="registerPassword" placeholder="Choose password" autocomplete="new-password"/>
+			<button type="button" id="registerButton" class="buttons secondary-action" onclick="doRegister();">Sign Up</button>
+			<span id="registerResult"></span>
+		</div>
+	</section>
+</main>
 
 </body>
 </html>

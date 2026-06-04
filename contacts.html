@@ -1,9 +1,12 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Personal Contact Manager</title>
 	<script type="text/javascript" src="js/code.js"></script>
     <link href="css/styles.css" rel="stylesheet">	
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel="stylesheet">
 	
 	<script type="text/javascript">
 	document.addEventListener('DOMContentLoaded', function() 
@@ -13,43 +16,75 @@
 	</script>
 	
 </head>
-<body>
+<body class="contacts-page">
 
-<h1 id="title">Personal Contact Manager</h1>
+<main class="dashboard-shell">
+	<header class="dashboard-header">
+		<div class="mini-poro" aria-hidden="true">
+			<span class="mini-horn mini-horn-left"></span>
+			<span class="mini-horn mini-horn-right"></span>
+			<span class="mini-eye mini-eye-left"></span>
+			<span class="mini-eye mini-eye-right"></span>
+			<span class="mini-tongue"></span>
+		</div>
+		<div>
+			<p class="eyebrow">Personal contact vault</p>
+			<h1 id="title">Poro Contact Manager</h1>
+		</div>
+		<div id="loggedInDiv">
+			<span id="userName"></span>
+			<button type="button" id="logoutButton" class="buttons" onclick="doLogout();">Log Out</button>
+		</div>
+	</header>
 
-<div id="loggedInDiv">
-	<span id="userName"></span><br />
-	<button type="button" id="logoutButton" class="buttons" onclick="doLogout();">Log Out</button>
-</div>
+	<section id="accessUIDiv">
+		<div class="toolbar">
+			<div class="search-wrap">
+				<label for="searchText">Search Contacts</label>
+				<div class="search-row">
+					<input type="text" id="searchText" placeholder="Search by partial name, phone, or email"/>
+					<button type="button" id="searchContactButton" class="buttons" onclick="searchContacts();">Search</button>
+				</div>
+				<span id="contactSearchResult"></span>
+			</div>
+		</div>
 
-<div id="accessUIDiv">
-	<br />
+		<div class="content-grid">
+			<div class="table-panel">
+				<table id="contactTable">
+					<thead>
+						<tr>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Phone</th>
+							<th>Email</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody id="contactTableBody"></tbody>
+				</table>
+			</div>
 
-	<input type="text" id="searchText" placeholder="Search contacts"/>
-	<button type="button" id="searchContactButton" class="buttons" onclick="searchContacts();">Search Contacts</button><br />
-	<span id="contactSearchResult"></span>
-	<table id="contactTable">
-		<thead>
-			<tr>
-				<th>First Name</th>
-				<th>Last Name</th>
-				<th>Phone</th>
-				<th>Email</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody id="contactTableBody"></tbody>
-	</table><br />
-
-	<input type="text" id="contactFirstName" placeholder="First Name">
-	<input type="text" id="contactLastName" placeholder="Last Name">
-	<input type="text" id="contactPhone" placeholder="Phone">
-	<input type="text" id="contactEmail" placeholder="Email">
-	<button type="button" id="addContactButton" class="buttons" onclick="addContact();">Add Contact</button>
-	<button type="button" id="updateContactButton" class="buttons" onclick="updateContact();">Update Contact</button>
-	<button type="button" id="cancelEditButton" class="buttons secondaryButton" onclick="clearContactForm();">Cancel</button><br />
-	<span id="contactSaveResult"></span>
-</div>
+			<aside class="contact-form-panel">
+				<span id="inner-title">Add or Edit Contact</span>
+				<label for="contactFirstName">First Name</label>
+				<input type="text" id="contactFirstName" placeholder="First name">
+				<label for="contactLastName">Last Name</label>
+				<input type="text" id="contactLastName" placeholder="Last name">
+				<label for="contactPhone">Phone</label>
+				<input type="text" id="contactPhone" placeholder="Phone number">
+				<label for="contactEmail">Email</label>
+				<input type="text" id="contactEmail" placeholder="Email address">
+				<div class="button-row">
+					<button type="button" id="addContactButton" class="buttons" onclick="addContact();">Add Contact</button>
+					<button type="button" id="updateContactButton" class="buttons" onclick="updateContact();">Update Contact</button>
+					<button type="button" id="cancelEditButton" class="buttons secondaryButton" onclick="clearContactForm();">Cancel</button>
+				</div>
+				<span id="contactSaveResult"></span>
+			</aside>
+		</div>
+	</section>
+</main>
 
 </body>
 </html>

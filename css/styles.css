@@ -1,202 +1,657 @@
-body 
-{
-    background-color: #707070;
+:root {
+    --ink: #162235;
+    --muted: #5d6b7c;
+    --panel: rgba(255, 255, 255, 0.92);
+    --panel-strong: #ffffff;
+    --frost: #eaf7fb;
+    --ice: #bfe7f2;
+    --teal: #147d8f;
+    --teal-dark: #0d5967;
+    --rose: #f06f9d;
+    --rose-dark: #b43d68;
+    --gold: #c49a4f;
+    --line: #cddce4;
+    --danger: #b3283e;
+    --shadow: 0 20px 60px rgba(23, 43, 63, 0.16);
 }
 
-#title 
-{
-    font-size: 40px;
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    font-family: "Ubuntu", Arial, sans-serif;
+    color: var(--ink);
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(234, 247, 251, 0.86)),
+        url("../images/background.png"),
+        linear-gradient(145deg, #dff3f7 0%, #f7fbfd 48%, #f8e7ee 100%);
+    background-size: cover, cover, cover;
+    background-position: center;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+        radial-gradient(circle at 14px 18px, rgba(255, 255, 255, 0.9) 0 1px, transparent 2px),
+        radial-gradient(circle at 72px 54px, rgba(20, 125, 143, 0.16) 0 1px, transparent 2px);
+    background-size: 96px 96px;
+    opacity: 0.7;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+label {
+    display: block;
+    margin: 14px 0 7px;
+    color: var(--muted);
+    font-size: 0.86rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: uppercase;
+}
+
+input[type="text"],
+input[type="password"] {
     width: 100%;
-    margin: 2% 5%;
-    text-align: center;
-    font-family: 'Ubuntu', sans-serif;
-    color: #FFFFFF;
+    min-height: 46px;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    outline: none;
+    color: var(--ink);
+    background: rgba(255, 255, 255, 0.92);
+    transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
 }
 
-#loginDiv
-{
-    font-size: 30px;
-    width: 70%;
-    margin-left: 15%;
-    padding: 25px;
-    background-color: #b2b2b2;
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: var(--teal);
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(20, 125, 143, 0.13);
 }
 
-#registerDiv
-{
-    font-size: 30px;
-    width: 70%;
-    margin-left: 15%;
-    margin-top: 2%;
-    padding: 25px;
-    background-color: #b2b2b2;
+#title {
+    margin: 0;
+    color: var(--ink);
+    font-size: clamp(2.2rem, 5vw, 4.4rem);
+    line-height: 0.95;
+    letter-spacing: 0;
 }
 
-#loggedInDiv
-{
-    font-size: 30px;
-    width: 70%;
-    margin-left: 15%;
-    padding: 25px;
-    background-color: #b2b2b2;
+.eyebrow {
+    margin: 0 0 10px;
+    color: var(--rose-dark);
+    font-size: 0.84rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: uppercase;
 }
 
-#accessUIDiv
-{
-    font-size: 30px;
-    width: 70%;
-    margin-left: 15%;
-    padding: 25px;
-    background-color: #b2b2b2;
+.lead {
+    max-width: 580px;
+    margin: 18px 0 0;
+    color: var(--muted);
+    font-size: 1.08rem;
+    line-height: 1.6;
 }
 
-.buttons
-{
-    font-size: 30px;
-    border-radius: 25px;
-    width: 50%;
-    margin-left: 25%;
-    font-family: 'Ubuntu', sans-serif;
+.auth-shell {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr);
+    gap: 32px;
+    width: min(1180px, calc(100% - 32px));
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 40px 0;
+    align-items: center;
 }
 
-.buttons:hover{
-    background-color: #00d5124f;
-    color: #FFFFFF;
-    opacity: 50%;
+.brand-panel {
+    min-width: 0;
 }
 
-#loginName
-{
-	font-size: 30px;
-}
-#loginPassword
-{
-	font-size: 30px;
-}
-#searchText
-{
-	font-size: 30px;
-}
-#registerFirstName,
-#registerLastName,
-#registerName,
-#registerPassword,
-#contactFirstName,
-#contactLastName,
-#contactPhone,
-#contactEmail
-{
-    font-size: 30px;
+.feature-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
 }
 
-input[type="text"],input[type="password"]{
-    border-radius: 25px;
-    text-align: center;
-    width: 80%;
-    margin-left: 10%;
-    margin-bottom: 2%;
-    font-family: 'Ubuntu', sans-serif;
+.feature-strip span {
+    padding: 9px 12px;
+    border: 1px solid rgba(20, 125, 143, 0.2);
+    border-radius: 999px;
+    color: var(--teal-dark);
+    background: rgba(255, 255, 255, 0.7);
+    font-size: 0.92rem;
+    font-weight: 700;
 }
 
-#inner-title{
-    display: inline-block;
-    font-size: 0.8em;
-    width: 90%;
-    text-align: center;
-    margin-left: 5%;
-    margin-bottom: 2%;
-    font-family: 'Ubuntu', sans-serif;
-    color: #95060a;
+.auth-card,
+#accessUIDiv {
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    background: var(--panel);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(16px);
 }
 
-#loginResult{
-    display: inline-block;
-    font-size: 0.8em;
-    width: 90%;
-    text-align: center;
-    margin-left: 5%;
-    margin-bottom: 2%;
-    font-family: 'Ubuntu', sans-serif;
-    color: #95060a;
+.auth-card {
+    padding: 28px;
 }
 
-#registerResult,
-#contactSearchResult,
-#contactSaveResult
-{
-    display: inline-block;
-    font-size: 0.8em;
-    width: 90%;
-    text-align: center;
-    margin-left: 5%;
-    margin-top: 2%;
-    margin-bottom: 1%;
-    font-family: 'Ubuntu', sans-serif;
-    color: #95060a;
+#loginDiv,
+#registerDiv,
+#loggedInDiv,
+#accessUIDiv {
+    width: auto;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    font-size: 1rem;
 }
 
-#userName{
-    display: inline-block;
-    width: 80%;
-    margin-left: 10%;
-    text-align: center;
+#registerDiv {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
 }
 
-#logoutButton{
-    width: 20%;
-    margin-left: 40%;
-}
-
-select{
-    width: 30%;
-    margin-left: 35%;
-    margin-top: 2%;
-    font-size: 0.75em;
-    font-family: 'Ubuntu', sans-serif;
-}
-
-#contactTable
-{
-    width: 100%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    border-collapse: collapse;
-    font-family: 'Ubuntu', sans-serif;
-    font-size: 0.6em;
-    background-color: #ffffff;
-}
-
-#contactTable th,
-#contactTable td
-{
-    padding: 10px;
-    border: 1px solid #707070;
+#inner-title {
+    display: block;
+    width: auto;
+    margin: 0 0 12px;
+    color: var(--teal-dark);
+    font-size: 1.2rem;
+    font-weight: 700;
     text-align: left;
 }
 
-#contactTable th
-{
-    background-color: #f0f0f0;
+.form-grid.two-column {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
 }
 
-.smallButton
-{
-    font-size: 0.9em;
-    margin-right: 8px;
-    padding: 6px 12px;
+.buttons,
+.smallButton {
+    min-height: 44px;
+    border: 0;
     border-radius: 8px;
-    font-family: 'Ubuntu', sans-serif;
-}
-
-.dangerButton
-{
-    background-color: #95060a;
     color: #ffffff;
+    background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+    box-shadow: 0 10px 22px rgba(20, 125, 143, 0.24);
+    cursor: pointer;
+    font-weight: 700;
+    transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
 }
 
-.secondaryButton,
+.buttons {
+    width: 100%;
+    margin: 18px 0 0;
+    padding: 11px 18px;
+    font-size: 1rem;
+}
+
+.buttons:hover,
+.smallButton:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 24px rgba(20, 125, 143, 0.28);
+}
+
+.secondary-action,
+.secondaryButton {
+    color: var(--teal-dark);
+    background: #e9f7fa;
+    box-shadow: none;
+}
+
+#loginResult,
+#registerResult,
+#contactSearchResult,
+#contactSaveResult {
+    display: block;
+    width: auto;
+    min-height: 22px;
+    margin: 12px 0 0;
+    color: var(--rose-dark);
+    font-size: 0.92rem;
+    font-weight: 700;
+    text-align: left;
+}
+
+.poro-scene {
+    position: relative;
+    width: min(390px, 72vw);
+    height: 285px;
+    margin: 0 0 28px;
+}
+
+.poro {
+    position: absolute;
+    left: 42px;
+    bottom: 16px;
+    width: 285px;
+    height: 205px;
+    border-radius: 52% 52% 46% 46%;
+    background:
+        radial-gradient(circle at 36% 30%, #ffffff 0 12%, transparent 27%),
+        radial-gradient(circle at 50% 38%, #eaf9ff 0 38%, #d2edf7 68%, #b9d8e4 100%);
+    box-shadow:
+        inset -18px -24px 30px rgba(55, 102, 123, 0.14),
+        0 24px 44px rgba(28, 65, 83, 0.2);
+}
+
+.poro::before,
+.poro::after {
+    content: "";
+    position: absolute;
+    bottom: -9px;
+    width: 92px;
+    height: 66px;
+    background: #d4eff8;
+    clip-path: polygon(0 0, 16% 82%, 35% 24%, 52% 100%, 70% 22%, 92% 88%, 100% 0);
+}
+
+.poro::before {
+    left: 26px;
+    transform: rotate(11deg);
+}
+
+.poro::after {
+    right: 28px;
+    transform: scaleX(-1) rotate(11deg);
+}
+
+.horn {
+    position: absolute;
+    top: -32px;
+    width: 60px;
+    height: 86px;
+    border-radius: 60% 35% 58% 35%;
+    background: linear-gradient(135deg, #d6bd83, #8b6b3d);
+    box-shadow: inset -8px -10px 0 rgba(96, 66, 32, 0.16);
+}
+
+.horn-left {
+    left: 18px;
+    transform: rotate(-40deg);
+}
+
+.horn-right {
+    right: 18px;
+    transform: scaleX(-1) rotate(-40deg);
+}
+
+.ear {
+    position: absolute;
+    top: 22px;
+    width: 82px;
+    height: 76px;
+    border-radius: 80% 20% 70% 30%;
+    background: #cdeaf4;
+    box-shadow: inset -10px -12px 0 rgba(98, 140, 158, 0.12);
+}
+
+.ear-left {
+    left: -38px;
+    transform: rotate(-28deg);
+}
+
+.ear-right {
+    right: -38px;
+    transform: scaleX(-1) rotate(-28deg);
+}
+
+.eye {
+    position: absolute;
+    top: 70px;
+    width: 31px;
+    height: 37px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 36% 28%, #ffffff 0 11%, transparent 13%),
+        #14283f;
+    box-shadow: 0 3px 0 rgba(255, 255, 255, 0.46);
+}
+
+.eye-left {
+    left: 88px;
+}
+
+.eye-right {
+    right: 88px;
+}
+
+.brow {
+    position: absolute;
+    top: 50px;
+    width: 42px;
+    height: 18px;
+    border-top: 6px solid rgba(114, 151, 166, 0.5);
+    border-radius: 50%;
+}
+
+.brow-left {
+    left: 78px;
+    transform: rotate(-10deg);
+}
+
+.brow-right {
+    right: 78px;
+    transform: rotate(10deg);
+}
+
+.mustache {
+    position: absolute;
+    bottom: 26px;
+    width: 112px;
+    height: 70px;
+    background: #eaf9ff;
+    clip-path: polygon(0 20%, 20% 52%, 38% 28%, 48% 74%, 64% 34%, 78% 86%, 100% 22%, 88% 100%, 0 100%);
+}
+
+.mustache-left {
+    left: 23px;
+    transform: rotate(3deg);
+}
+
+.mustache-right {
+    right: 23px;
+    transform: scaleX(-1) rotate(3deg);
+}
+
+.tongue {
+    position: absolute;
+    left: 88px;
+    bottom: -32px;
+    width: 128px;
+    height: 92px;
+    border-radius: 68% 42% 62% 42%;
+    background:
+        radial-gradient(circle at 48% 18%, rgba(255, 255, 255, 0.28) 0 18%, transparent 19%),
+        linear-gradient(145deg, #ff8bb5, var(--rose));
+    transform: rotate(12deg);
+    box-shadow: inset -10px -14px 0 rgba(180, 61, 104, 0.2);
+}
+
+.dashboard-shell {
+    position: relative;
+    z-index: 1;
+    width: min(1240px, calc(100% - 28px));
+    margin: 0 auto;
+    padding: 24px 0 34px;
+}
+
+.dashboard-header {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 18px;
+    align-items: center;
+    margin-bottom: 18px;
+    padding: 20px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.72);
+    box-shadow: 0 10px 36px rgba(23, 43, 63, 0.12);
+}
+
+.contacts-page #title {
+    font-size: clamp(1.8rem, 4vw, 3.2rem);
+}
+
+.mini-poro {
+    position: relative;
+    width: 86px;
+    height: 70px;
+    border-radius: 52% 52% 45% 45%;
+    background: radial-gradient(circle at 42% 32%, #ffffff 0 13%, #d8f1f8 54%, #b9d9e5 100%);
+    box-shadow: inset -8px -10px 0 rgba(55, 102, 123, 0.12);
+}
+
+.mini-horn,
+.mini-eye,
+.mini-tongue {
+    position: absolute;
+}
+
+.mini-horn {
+    top: -13px;
+    width: 20px;
+    height: 30px;
+    border-radius: 60% 36% 60% 36%;
+    background: linear-gradient(135deg, #d6bd83, #8b6b3d);
+}
+
+.mini-horn-left {
+    left: 7px;
+    transform: rotate(-38deg);
+}
+
+.mini-horn-right {
+    right: 7px;
+    transform: scaleX(-1) rotate(-38deg);
+}
+
+.mini-eye {
+    top: 27px;
+    width: 10px;
+    height: 13px;
+    border-radius: 50%;
+    background: #14283f;
+}
+
+.mini-eye-left {
+    left: 27px;
+}
+
+.mini-eye-right {
+    right: 27px;
+}
+
+.mini-tongue {
+    left: 35px;
+    bottom: -11px;
+    width: 33px;
+    height: 25px;
+    border-radius: 68% 42% 62% 42%;
+    background: var(--rose);
+    transform: rotate(13deg);
+}
+
+#loggedInDiv {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+#userName {
+    display: inline-block;
+    width: auto;
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-align: right;
+}
+
+#logoutButton {
+    width: auto;
+    min-width: 104px;
+    margin: 0;
+}
+
+#accessUIDiv {
+    padding: 22px;
+}
+
+.toolbar {
+    margin-bottom: 18px;
+}
+
+.search-wrap {
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--panel-strong);
+}
+
+.search-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 150px;
+    gap: 12px;
+    align-items: end;
+}
+
+#searchContactButton {
+    margin: 0;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 330px;
+    gap: 18px;
+    align-items: start;
+}
+
+.table-panel,
+.contact-form-panel {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--panel-strong);
+}
+
+.table-panel {
+    overflow-x: auto;
+}
+
+.contact-form-panel {
+    padding: 18px;
+}
+
+#contactTable {
+    width: 100%;
+    min-width: 720px;
+    margin: 0;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    background: transparent;
+}
+
+#contactTable th,
+#contactTable td {
+    padding: 14px 16px;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: middle;
+}
+
+#contactTable th {
+    color: var(--teal-dark);
+    background: #edf8fb;
+    font-size: 0.78rem;
+    letter-spacing: 0;
+    text-transform: uppercase;
+}
+
+#contactTable tbody tr:hover {
+    background: #f7fbfc;
+}
+
+.button-row {
+    display: grid;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+.smallButton {
+    min-height: 34px;
+    margin: 0 8px 6px 0;
+    padding: 7px 12px;
+    font-size: 0.86rem;
+}
+
+.dangerButton {
+    background: linear-gradient(135deg, var(--rose-dark), var(--danger));
+    box-shadow: 0 10px 18px rgba(179, 40, 62, 0.2);
+}
+
 #updateContactButton,
-#cancelEditButton
-{
+#cancelEditButton {
     display: none;
+}
+
+@media (max-width: 920px) {
+    .auth-shell,
+    .content-grid,
+    .dashboard-header {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-shell {
+        align-items: start;
+        padding-top: 28px;
+    }
+
+    .dashboard-header,
+    #loggedInDiv {
+        align-items: flex-start;
+    }
+
+    #loggedInDiv {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    #userName {
+        text-align: left;
+    }
+}
+
+@media (max-width: 620px) {
+    .auth-shell,
+    .dashboard-shell {
+        width: min(100% - 20px, 1240px);
+    }
+
+    .auth-card,
+    #accessUIDiv,
+    .dashboard-header,
+    .search-wrap,
+    .contact-form-panel {
+        padding: 16px;
+    }
+
+    .form-grid.two-column,
+    .search-row {
+        grid-template-columns: 1fr;
+    }
+
+    .poro-scene {
+        height: 230px;
+        transform: scale(0.82);
+        transform-origin: left bottom;
+        margin-bottom: 0;
+    }
+
+    .feature-strip span {
+        width: 100%;
+        text-align: center;
+    }
 }
