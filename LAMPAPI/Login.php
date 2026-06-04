@@ -1,27 +1,22 @@
 
 <?php
-
 	$inData = getRequestInfo();
-	
-	$id = 0;
-	$firstName = "";
-	$lastName = "";
 
-	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
-	if( $conn->connect_error )
+	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
+	if ($conn->connect_error)
 	{
-		returnWithError( $conn->connect_error );
+		returnWithError($conn->connect_error);
 	}
 	else
 	{
-		$stmt = $conn->prepare("SELECT ID,firstName,lastName FROM Users WHERE Login=? AND Password =?");
+		$stmt = $conn->prepare("SELECT ID, firstName, lastName FROM Users WHERE Login=? AND Password=?");
 		$stmt->bind_param("ss", $inData["login"], $inData["password"]);
 		$stmt->execute();
 		$result = $stmt->get_result();
 
-		if( $row = $result->fetch_assoc()  )
+		if ($row = $result->fetch_assoc())
 		{
-			returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
+			returnWithInfo($row["firstName"], $row["lastName"], $row["ID"]);
 		}
 		else
 		{
@@ -31,29 +26,25 @@
 		$stmt->close();
 		$conn->close();
 	}
-	
+
 	function getRequestInfo()
 	{
-		return json_decode(file_get_contents('php://input'), true);
+		return json_decode(file_get_contents("php://input"), true);
 	}
 
-	function sendResultInfoAsJson( $obj )
+	function sendResultInfoAsJson($obj)
 	{
-		header('Content-type: application/json');
-		echo $obj;
+		header("Content-type: application/json");
+		echo json_encode($obj);
 	}
-	
-	function returnWithError( $err )
+
+	function returnWithError($err)
 	{
-		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
-		sendResultInfoAsJson( $retValue );
+		sendResultInfoAsJson(array("id" => 0, "firstName" => "", "lastName" => "", "error" => $err));
 	}
-	
-	function returnWithInfo( $firstName, $lastName, $id )
+
+	function returnWithInfo($firstName, $lastName, $id)
 	{
-		$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
-		sendResultInfoAsJson( $retValue );
+		sendResultInfoAsJson(array("id" => (int)$id, "firstName" => $firstName, "lastName" => $lastName, "error" => ""));
 	}
-	
 ?>
-

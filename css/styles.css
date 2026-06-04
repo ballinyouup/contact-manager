@@ -22,6 +22,16 @@ body
     background-color: #b2b2b2;
 }
 
+#registerDiv
+{
+    font-size: 30px;
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 2%;
+    padding: 25px;
+    background-color: #b2b2b2;
+}
+
 #loggedInDiv
 {
     font-size: 30px;
@@ -67,9 +77,16 @@ body
 {
 	font-size: 30px;
 }
-#colorText
+#registerFirstName,
+#registerLastName,
+#registerName,
+#registerPassword,
+#contactFirstName,
+#contactLastName,
+#contactPhone,
+#contactEmail
 {
-	font-size: 30px;
+    font-size: 30px;
 }
 
 input[type="text"],input[type="password"]{
@@ -103,6 +120,21 @@ input[type="text"],input[type="password"]{
     color: #95060a;
 }
 
+#registerResult,
+#contactSearchResult,
+#contactSaveResult
+{
+    display: inline-block;
+    font-size: 0.8em;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    font-family: 'Ubuntu', sans-serif;
+    color: #95060a;
+}
+
 #userName{
     display: inline-block;
     width: 80%;
@@ -123,18 +155,48 @@ select{
     font-family: 'Ubuntu', sans-serif;
 }
 
-#colorSearchResult{
-    display: none;
+#contactTable
+{
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-collapse: collapse;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 0.6em;
+    background-color: #ffffff;
 }
 
-#colorAddResult{
-    display: inline-block;
-    font-size: 0.8em;
-    width: 90%;
-    text-align: center;
-    margin-left: 5%;
-    margin-top: 2%;
-    margin-bottom: 1%;
+#contactTable th,
+#contactTable td
+{
+    padding: 10px;
+    border: 1px solid #707070;
+    text-align: left;
+}
+
+#contactTable th
+{
+    background-color: #f0f0f0;
+}
+
+.smallButton
+{
+    font-size: 0.9em;
+    margin-right: 8px;
+    padding: 6px 12px;
+    border-radius: 8px;
     font-family: 'Ubuntu', sans-serif;
-    color: #95060a;
+}
+
+.dangerButton
+{
+    background-color: #95060a;
+    color: #ffffff;
+}
+
+.secondaryButton,
+#updateContactButton,
+#cancelEditButton
+{
+    display: none;
 }
